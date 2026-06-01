@@ -68,7 +68,7 @@ nav {
 }
 .hero-overlay {
   position: absolute; bottom: 0; left: 0; right: 0;
-  background: linear-gradient(to top, rgba(248,244,238,1) 0%, rgba(248,244,238,.85) 35%, transparent 65%);
+  background: linear-gradient(to top, rgba(248,244,238,1) 0%, rgba(248,244,238,.95) 50%, rgba(248,244,238,.6) 70%, transparent 85%);
   padding: 4rem;
 }
 .hero-eyebrow { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--amber); margin-bottom: .75rem; }
@@ -380,8 +380,8 @@ footer { padding: 2rem 3rem; border-top: 1px solid var(--rule); display: flex; j
   </div>
 
   <div class="full-width reveal">
-    <div class="img-block">
-      <img src="images/dyp-event-1.jpg" alt="Guest in meditation by the gong">
+    <div class="img-block fixed" style="height:560px;">
+      <img src="images/dyp-event-1.jpg" alt="Guest in meditation by the gong" style="object-position:center 30%;">
     </div>
   </div>
 
@@ -395,6 +395,21 @@ footer { padding: 2rem 3rem; border-top: 1px solid var(--rule); display: flex; j
     </div>
   </div>
 
+  <!-- VIDEOS 2 & 3 — additional workshop footage -->
+  <div class="grid-2 reveal">
+    <div class="video-block">
+      <video src="images/dyp-workshop-2.mp4"
+        autoplay muted loop playsinline
+        style="width:100%;display:block;height:auto;">
+      </video>
+    </div>
+    <div class="video-block">
+      <video src="images/dyp-workshop-3.mp4"
+        autoplay muted loop playsinline
+        style="width:100%;display:block;height:auto;">
+      </video>
+    </div>
+  </div>
   <hr class="section-rule">
 
   <!-- SCHEDULE -->
