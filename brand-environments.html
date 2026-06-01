@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxury Brand Environments — Javier Skipper</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --void:      #f8f4ee;
+  --deep:      #f0e8d8;
+  --stone:     #e4d8c4;
+  --amber:     #7a5218;
+  --amber-lt:  #c8943a;
+  --amber-dim: #b07a38;
+  --linen:     #1e1408;
+  --linen-dim: #5a4020;
+  --dust:      #c8b89a;
+  --rule:      #d8ccb8;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--void);
+  color: var(--linen);
+  overflow-x: hidden;
+}
+
+/* ── NAV ─────────────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  padding: 1.25rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  z-index: 100;
+  background: rgba(248,244,238,.97);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-back {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--amber); text-decoration: none; transition: gap .3s;
+}
+.nav-back:hover { gap: 14px; }
+.nav-back::before { content: '←'; font-size: 12px; }
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300; font-size: 14px;
+  letter-spacing: .22em; color: var(--linen-dim);
+  text-decoration: none; text-transform: uppercase;
+}
+.nav-project { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--dust); }
+
+/* ── REVEAL ──────────────────────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 1s ease, transform 1s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── HERO ────────────────────────────────────────────────────────── */
+.hero {
+  width: 100%; position: relative;
+  margin-top: 0; overflow: hidden;
+}
+.hero img {
+  width: 100%; height: auto; display: block;
+  max-height: 92vh; object-fit: cover; object-position: center center;
+}
+.hero-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(248,244,238,1) 0%, rgba(248,244,238,.95) 30%, rgba(248,244,238,.4) 60%, transparent 80%);
+  padding: 4rem;
+}
+.hero-eyebrow { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--amber); margin-bottom: .75rem; }
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400; font-size: clamp(32px, 5vw, 60px);
+  line-height: 1.1; color: var(--linen); margin-bottom: .5rem;
+  text-shadow: 0 1px 20px rgba(248,244,238,.8);
+}
+.hero-sub { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: var(--linen-dim); }
+
+/* ── CONTENT ─────────────────────────────────────────────────────── */
+.content { max-width: 960px; margin: 0 auto; padding: 0 3rem 6rem; }
+
+/* ── META ────────────────────────────────────────────────────────── */
+.meta-block {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2rem; padding: 3rem 0;
+  border-bottom: 1px solid var(--rule); margin-bottom: 4rem;
+}
+.meta-label { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--dust); margin-bottom: .5rem; }
+.meta-value { font-size: 13px; color: var(--linen-dim); font-weight: 300; line-height: 1.5; }
+
+/* ── TYPOGRAPHY ──────────────────────────────────────────────────── */
+.section-eyebrow { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--amber); margin-bottom: .75rem; }
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300; font-size: clamp(24px, 3vw, 36px);
+  color: var(--linen); margin-bottom: 1.5rem; line-height: 1.2;
+}
+.section-body { font-size: 13px; line-height: 1.9; color: var(--linen-dim); font-weight: 300; max-width: 640px; margin-bottom: 1rem; }
+.section-rule { border: none; border-top: 1px solid var(--rule); margin: 4rem 0; }
+
+/* ── IMAGE BLOCKS ────────────────────────────────────────────────── */
+.img-block { line-height: 0; background: var(--stone); }
+.img-block img { width: 100%; height: auto; display: block; }
+.img-block.fixed { overflow: hidden; }
+.img-block.fixed img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ── GRID LAYOUTS ────────────────────────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1.5rem 0; align-items: start; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 1.5rem 0; align-items: start; }
+.grid-asymm { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin: 1.5rem 0; align-items: start; }
+.grid-asymm-r { display: grid; grid-template-columns: 1fr 2fr; gap: 12px; margin: 1.5rem 0; align-items: start; }
+.full-width { margin: 1.5rem 0; }
+
+/* ── PROJECT LABEL ───────────────────────────────────────────────── */
+.project-label {
+  font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--dust); margin-top: 10px; font-style: italic;
+  padding-bottom: 1rem;
+}
+
+/* ── CHAPTER ─────────────────────────────────────────────────────── */
+.chapter { margin-bottom: 4rem; }
+.chapter-header {
+  display: flex; align-items: baseline; gap: 1.5rem;
+  padding-bottom: 1rem; margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.chapter-num { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: var(--amber-dim); flex-shrink: 0; }
+.chapter-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(20px, 2.5vw, 28px); color: var(--linen); }
+.chapter-desc { font-size: 12px; line-height: 1.85; color: var(--linen-dim); font-weight: 300; margin-bottom: 2rem; max-width: 600px; }
+
+/* ── SPEC TAG ────────────────────────────────────────────────────── */
+.spec-tag {
+  display: inline-block; font-size: 9px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--amber-dim);
+  border: 1px solid var(--rule); padding: 4px 10px;
+  margin-right: 6px; margin-bottom: 6px; background: var(--deep);
+}
+
+/* ── NEXT PROJECT ────────────────────────────────────────────────── */
+.next-project {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 3rem 0; border-top: 1px solid var(--rule);
+  text-decoration: none; transition: opacity .3s;
+}
+.next-project:hover { opacity: .7; }
+.next-label { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--dust); margin-bottom: .5rem; }
+.next-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 24px; color: var(--linen); font-style: italic; }
+.next-arrow { font-size: 28px; color: var(--amber-dim); }
+
+/* ── FOOTER ──────────────────────────────────────────────────────── */
+footer { padding: 2rem 3rem; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; }
+.footer-name { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--amber-dim); }
+.footer-copy { font-size: 9px; color: var(--dust); }
+
+/* ── RESPONSIVE ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-project { display: none; }
+  .hero-overlay { padding: 2rem 1.5rem; }
+  .content { padding: 0 1.5rem 4rem; }
+  .meta-block { grid-template-columns: 1fr 1fr; }
+  .grid-2, .grid-3, .grid-asymm, .grid-asymm-r { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-back">All Projects</a>
+  <a href="index.html" class="nav-logo">Javier Skipper</a>
+  <span class="nav-project">Luxury Brand Environments</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="images/vm-hero.jpg" alt="Balmain Paris Rotunda — Visual Merchandising">
+  <div class="hero-overlay">
+    <p class="hero-eyebrow">Estée Lauder Companies · 2023–2025</p>
+    <h1 class="hero-title">Luxury Brand<br>Environments</h1>
+    <p class="hero-sub">From gifting suite to retail floor — designing the brand world at every scale.</p>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- META -->
+  <div class="meta-block reveal">
+    <div>
+      <div class="meta-label">Client</div>
+      <div class="meta-value">Estée Lauder Companies · Tom Ford Beauty · Balmain Paris · Jo Malone London · Emporio Armani</div>
+    </div>
+    <div>
+      <div class="meta-label">Scope</div>
+      <div class="meta-value">Brand activations · Spatial styling · 3D concept development · Retail planning · In-store execution</div>
+    </div>
+    <div>
+      <div class="meta-label">Tools</div>
+      <div class="meta-value">SketchUp · Rhino · V-Ray · Photoshop · Illustrator</div>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="reveal">
+    <p class="section-eyebrow">Overview</p>
+    <h2 class="section-title">Making people feel<br>the brand before they touch the product</h2>
+    <p class="section-body">
+      Luxury retail design is a form of environmental storytelling — every surface, every sightline, every product placement is a decision about how a brand wants to be felt. Across five years within the Estée Lauder Companies portfolio, I worked at every scale of that discipline: from a prestige gifting activation at the Academy Awards to overscale retail installations at Bloomingdales and Bergdorf Goodman, to 3D concept development and launch unit planning for national retail rollouts.
+    </p>
+    <p class="section-body">
+      This page documents four distinct bodies of work — each representing a different dimension of luxury brand environment design.
+    </p>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- ── SECTION 01: TF OSCARS ──────────────────────────────────── -->
+  <div class="chapter reveal">
+    <div class="chapter-header">
+      <span class="chapter-num">01</span>
+      <h3 class="chapter-title">Tom Ford Beauty — Oscars Gifting Suite</h3>
+    </div>
+    <p class="chapter-desc">
+      A private gifting suite curated for Academy Awards weekend — product vignette design, spatial styling, and brand atmosphere at one of the most visible moments in the luxury beauty calendar. The suite balanced editorial restraint with the warmth required of a high-touch hospitality environment.
+    </p>
+    <div class="grid-2 reveal" style="margin-bottom:4px;">
+      <span class="spec-tag">Brand Activation</span>
+      <span></span>
+    </div>
+    <div class="full-width reveal">
+      <div class="img-block fixed" style="height:560px;">
+        <img src="images/tf-suite-hero.jpg" alt="Tom Ford Beauty Oscars Gifting Suite — full room" style="object-position:center 30%;">
+      </div>
+    </div>
+    <div class="grid-2 reveal">
+      <div class="img-block">
+        <img src="images/tf-suite-detail-1.jpg" alt="Tom Ford Vanilla Sex fragrance tray">
+      </div>
+      <div class="img-block">
+        <img src="images/tf-suite-detail-2.jpg" alt="Tom Ford lipstick display">
+      </div>
+    </div>
+    <p class="project-label">Tom Ford Beauty · Oscars Gifting Suite · Los Angeles, 2024</p>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- ── SECTION 02: RETAIL CONCEPT ENVIRONMENTS ───────────────── -->
+  <div class="chapter reveal">
+    <div class="chapter-header">
+      <span class="chapter-num">02</span>
+      <h3 class="chapter-title">Retail Concept Environments</h3>
+    </div>
+    <p class="chapter-desc">
+      3D concept development and spatial planning for branded retail environments — translating campaign assets and brand visual language into physical installations that perform within strict retailer guidelines and sightline requirements.
+    </p>
+
+    <!-- Emporio Armani -->
+    <div class="full-width reveal">
+      <div class="img-block">
+        <img src="images/vm-ea-render-1.jpg" alt="Emporio Armani Bloomingdales concept render">
+      </div>
+    </div>
+    <div class="grid-3 reveal">
+      <div class="img-block">
+        <img src="images/vm-ea-render-2.jpg" alt="Emporio Armani window concept back">
+      </div>
+      <div class="img-block">
+        <img src="images/vm-ea-render-3.jpg" alt="Emporio Armani window concept front">
+      </div>
+      <div class="img-block">
+        <img src="images/vm-ea-render-4.jpg" alt="Emporio Armani additional render">
+      </div>
+    </div>
+    <p class="project-label">Emporio Armani · Bloomingdales Visual Week Installations · NYC · SketchUp / V-Ray · 2025</p>
+
+    <div class="grid-2 reveal" style="margin-top:2rem;">
+      <div class="img-block">
+        <img src="images/vm-ea-3d.jpg" alt="Emporio Armani Stronger With You 3D concept">
+      </div>
+      <div class="img-block">
+        <img src="images/vm-tf-seminar.jpg" alt="Tom Ford Fragrance Seminar Presentation Environment">
+      </div>
+    </div>
+    <div class="grid-2" style="margin-top:0;">
+      <p class="project-label">Emporio Armani · Stronger With You · SketchUp concept · 2025</p>
+      <p class="project-label">Tom Ford Beauty · Fragrance Seminar Presentation Environment · V-Ray · 2024</p>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- ── SECTION 03: IN-STORE STYLING ──────────────────────────── -->
+  <div class="chapter reveal">
+    <div class="chapter-header">
+      <span class="chapter-num">03</span>
+      <h3 class="chapter-title">In-Store Styling & Floor Execution</h3>
+    </div>
+    <p class="chapter-desc">
+      Physical execution of branded environments within luxury department store settings — spatial merchandising, product elevation, and overscale storytelling installations that reinforce brand identity within shared retail floors.
+    </p>
+
+    <div class="grid-2 reveal">
+      <div class="img-block">
+        <img src="images/vm-balmain-blackbox.jpg" alt="Balmain Paris blackbox environment">
+      </div>
+      <div class="img-block">
+        <img src="images/vm-balmain-entry.jpg" alt="Balmain Paris store entry styling">
+      </div>
+    </div>
+    <p class="project-label">Balmain Paris · Floor Layout Execution & Styling · Bergdorf Goodman, NYC · 2024</p>
+
+    <div class="grid-2 reveal" style="margin-top:2rem;">
+      <div class="img-block">
+        <img src="images/vm-jomalone.jpg" alt="Jo Malone London seasonal WOW installation">
+      </div>
+      <div class="img-block">
+        <img src="images/vm-jomalone-render.jpg" alt="Jo Malone London WOW installation concept render">
+      </div>
+    </div>
+    <p class="project-label">Jo Malone London · Seasonal WOW Installation Concept & Execution · Bloomingdales, NYC · 2024</p>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- ── SECTION 04: CONCEPT TO PRODUCTION ─────────────────────── -->
+  <div class="chapter reveal">
+    <div class="chapter-header">
+      <span class="chapter-num">04</span>
+      <h3 class="chapter-title">Concept to Production Workflow</h3>
+    </div>
+    <p class="chapter-desc">
+      End-to-end development of retail launch units — from initial sketch and 3D concept through planogram development, brand sell-in documentation, and production-ready specifications for national retail rollout.
+    </p>
+
+    <!-- Launch Unit Development -->
+    <div class="section-eyebrow reveal" style="margin-bottom:.75rem;">Launch Unit Development</div>
+
+    <div class="grid-3 reveal">
+      <div class="img-block">
+        <img src="images/vm-lu-sketch-1.jpg" alt="Launch unit sketch concept 1">
+      </div>
+      <div class="img-block">
+        <img src="images/vm-lu-sketch-2.jpg" alt="Launch unit sketch concept 2">
+      </div>
+      <div class="img-block">
+        <img src="images/vm-lu-sketch-3.jpg" alt="Launch unit sketch concept 3">
+      </div>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="img-block">
+        <img src="images/vm-lu-artboard.jpg" alt="Launch unit artboard layout">
+      </div>
+      <div class="img-block">
+        <img src="images/vm-lu-renders.jpg" alt="Launch unit combined renders">
+      </div>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="img-block">
+        <img src="images/vm-lu-3d-front.jpg" alt="Launch unit 3D front render">
+      </div>
+      <div class="img-block">
+        <img src="images/vm-lu-3d-alt.jpg" alt="Launch unit 3D alternate render">
+      </div>
+    </div>
+
+    <!-- Retail Planning -->
+    <div class="section-eyebrow reveal" style="margin-top:3rem;margin-bottom:.75rem;">Retail Planning & Fixture Installation</div>
+    <p class="section-body reveal">
+      3D SketchUp working files and display unit renders developed for retailer sell-in and production handoff.
+    </p>
+
+    <div class="grid-3 reveal">
+      <div class="img-block">
+        <img src="images/vm-tf-fyf-1.jpg" alt="Tom Ford Find Your Fragrance wall concept 1">
+      </div>
+      <div class="img-block">
+        <img src="images/vm-tf-fyf-2.jpg" alt="Tom Ford Find Your Fragrance wall concept 2">
+      </div>
+      <div class="img-block">
+        <img src="images/vm-tf-fyf-3.jpg" alt="Tom Ford Find Your Fragrance wall concept 3">
+      </div>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="img-block">
+        <img src="images/vm-lm-hook.jpg" alt="La Mer hook table planning">
+      </div>
+      <div class="img-block">
+        <img src="images/vm-vs-planogram.jpg" alt="Vanilla Sex planogram and sell-in documentation">
+      </div>
+    </div>
+    <p class="project-label">Tom Ford Beauty · Vanilla Sex at Sephora "Find Your Fragrance Wall" Launch · 2023</p>
+  </div>
+
+  <!-- NEXT PROJECT -->
+  <a href="divine-retreat.html" class="next-project reveal">
+    <div>
+      <p class="next-label">Back to first project</p>
+      <p class="next-title">Divine Spring Awakening Retreat →</p>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Javier Skipper</span>
+  <span class="footer-copy">© 2026 · Experiential Creative Director</span>
+</footer>
+
+<script>
+const els = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+els.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
