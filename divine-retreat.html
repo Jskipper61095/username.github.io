@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Divine Spring Awakening Retreat — Javier Skipper</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --void:      #f8f4ee;
+  --deep:      #f0e8d8;
+  --stone:     #e4d8c4;
+  --amber:     #7a5218;
+  --amber-lt:  #c8943a;
+  --amber-dim: #b07a38;
+  --linen:     #1e1408;
+  --linen-dim: #5a4020;
+  --dust:      #c8b89a;
+  --rule:      #d8ccb8;
+  --sage:      #5a6848;
+  --sage-lt:   #8a9878;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--void);
+  color: var(--linen);
+  overflow-x: hidden;
+}
+
+/* ── NAV ─────────────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  padding: 1.25rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  z-index: 100;
+  background: rgba(248,244,238,.97);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-back {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--amber); text-decoration: none; transition: gap .3s;
+}
+.nav-back:hover { gap: 14px; }
+.nav-back::before { content: '←'; font-size: 12px; }
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300; font-size: 14px;
+  letter-spacing: .22em; color: var(--linen-dim);
+  text-decoration: none; text-transform: uppercase;
+}
+.nav-project { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--dust); }
+
+/* ── REVEAL ──────────────────────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 1s ease, transform 1s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── HERO VIDEO ──────────────────────────────────────────────────── */
+.hero-video {
+  width: 100%; position: relative;
+  margin-top: 0; background: var(--stone); overflow: hidden;
+}
+.hero-video video {
+  width: 100%; display: block;
+  max-height: 100vh; object-fit: cover;
+}
+.hero-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(248,244,238,.95) 0%, transparent 60%);
+  padding: 4rem;
+}
+.hero-eyebrow { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--amber); margin-bottom: .75rem; }
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300; font-size: clamp(32px, 5vw, 60px);
+  line-height: 1.1; color: var(--linen); margin-bottom: .5rem;
+}
+.hero-sub { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: var(--linen-dim); }
+
+/* ── CONTENT ─────────────────────────────────────────────────────── */
+.content { max-width: 960px; margin: 0 auto; padding: 0 3rem 6rem; }
+
+/* ── META ────────────────────────────────────────────────────────── */
+.meta-block {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 2rem; padding: 3rem 0;
+  border-bottom: 1px solid var(--rule); margin-bottom: 4rem;
+}
+.meta-label { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--dust); margin-bottom: .5rem; }
+.meta-value { font-size: 13px; color: var(--linen-dim); font-weight: 300; line-height: 1.5; }
+
+/* ── TYPOGRAPHY ──────────────────────────────────────────────────── */
+.section-eyebrow { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--amber); margin-bottom: .75rem; }
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300; font-size: clamp(24px, 3vw, 36px);
+  color: var(--linen); margin-bottom: 1.5rem; line-height: 1.2;
+}
+.section-body { font-size: 13px; line-height: 1.9; color: var(--linen-dim); font-weight: 300; max-width: 640px; margin-bottom: 1rem; }
+.section-rule { border: none; border-top: 1px solid var(--rule); margin: 4rem 0; }
+
+/* ── IMAGE & VIDEO BLOCKS ────────────────────────────────────────── */
+.img-block { line-height: 0; background: var(--stone); }
+.img-block img { width: 100%; height: auto; display: block; }
+.img-block.fixed { overflow: hidden; }
+.img-block.fixed img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.video-block { line-height: 0; background: var(--stone); }
+.video-block video { width: 100%; display: block; height: auto; }
+
+/* ── GRID LAYOUTS ────────────────────────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1.5rem 0; align-items: start; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 1.5rem 0; align-items: start; }
+.grid-asymm { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin: 1.5rem 0; align-items: start; }
+.grid-asymm-r { display: grid; grid-template-columns: 1fr 2fr; gap: 12px; margin: 1.5rem 0; align-items: start; }
+.full-width { margin: 1.5rem 0; }
+
+/* ── PROPERTY BLOCK ──────────────────────────────────────────────── */
+.property-block {
+  margin: 2rem 0; position: relative; overflow: hidden;
+}
+.property-block img { width: 100%; height: auto; display: block; }
+.property-caption {
+  background: var(--deep); padding: 1.25rem 1.5rem;
+  border-left: 3px solid var(--sage);
+}
+.property-caption p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; font-style: italic;
+  color: var(--linen-dim); line-height: 1.6;
+}
+
+/* ── ZONE CARDS ──────────────────────────────────────────────────── */
+.zones { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin: 2rem 0; background: var(--rule); }
+.zone-card { background: var(--void); padding: 2rem; }
+.zone-icon {
+  width: 20px; height: 1px;
+  background: var(--amber-dim); margin-bottom: 1rem;
+}
+.zone-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 20px; color: var(--linen); margin-bottom: .75rem; }
+.zone-desc { font-size: 12px; line-height: 1.8; color: var(--linen-dim); font-weight: 300; }
+
+/* ── SCHEDULE BLOCK ──────────────────────────────────────────────── */
+.schedule-block { margin: 2rem 0; }
+.schedule-block img { width: 100%; height: auto; display: block; max-width: 600px; margin: 0 auto; }
+
+/* ── SOCIAL SECTION ──────────────────────────────────────────────── */
+.social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1.5rem 0; align-items: start; }
+.social-credit {
+  font-size: 9px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--dust); margin-top: 6px; font-style: italic;
+}
+
+/* ── MODALITIES ──────────────────────────────────────────────────── */
+.modalities { display: flex; flex-wrap: wrap; gap: 8px; margin: 1.5rem 0 2rem; }
+.modality {
+  font-size: 9px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--linen-dim); border: 1px solid var(--rule);
+  padding: 6px 14px; background: var(--deep);
+}
+
+/* ── NEXT PROJECT ────────────────────────────────────────────────── */
+.next-project {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 3rem 0; border-top: 1px solid var(--rule);
+  text-decoration: none; transition: opacity .3s;
+}
+.next-project:hover { opacity: .7; }
+.next-label { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--dust); margin-bottom: .5rem; }
+.next-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 24px; color: var(--linen); font-style: italic; }
+.next-arrow { font-size: 28px; color: var(--amber-dim); }
+
+/* ── FOOTER ──────────────────────────────────────────────────────── */
+footer { padding: 2rem 3rem; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; }
+.footer-name { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--amber-dim); }
+.footer-copy { font-size: 9px; color: var(--dust); }
+
+/* ── RESPONSIVE ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-project { display: none; }
+  .hero-overlay { padding: 2rem 1.5rem; }
+  .content { padding: 0 1.5rem 4rem; }
+  .meta-block { grid-template-columns: 1fr 1fr; }
+  .grid-2, .grid-3, .grid-asymm, .grid-asymm-r, .zones, .social-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-back">All Projects</a>
+  <a href="index.html" class="nav-logo">Javier Skipper</a>
+  <span class="nav-project">Divine Spring Awakening</span>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- HERO VIDEO                                                      -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<img src="images/dyp-hero.jpg"
+  alt="Divine Spring Awakening Retreat"
+  style="width:100%;display:block;max-height:100vh;object-fit:cover;object-position:center center;">
+  <div class="hero-overlay">
+    <p class="hero-eyebrow">Divine Yoga Properties · Temecula, CA · May 2026</p>
+    <h1 class="hero-title">Divine Spring<br>Awakening Retreat</h1>
+    <p class="hero-sub">A full-spectrum sacred gathering in Wine Country.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- CONTENT                                                         -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="content">
+
+  <!-- META -->
+  <div class="meta-block reveal">
+    <div>
+      <div class="meta-label">Client</div>
+      <div class="meta-value">Divine Yoga Properties</div>
+    </div>
+    <div>
+      <div class="meta-label">Role</div>
+      <div class="meta-value">Experiential Creative Director · Spatial Design & Atmosphere</div>
+    </div>
+    <div>
+      <div class="meta-label">Location</div>
+      <div class="meta-value">Wine Country, Temecula CA</div>
+    </div>
+    <div>
+      <div class="meta-label">Date</div>
+      <div class="meta-value">May 23, 2026 · 2–9 PM</div>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="reveal">
+    <p class="section-eyebrow">Project Overview</p>
+    <h2 class="section-title">Designing the container<br>for transformation</h2>
+    <p class="section-body">
+      The Divine Spring Awakening Retreat was a seven-hour, multi-element wellness experience held at a private estate in Wine Country, Temecula. Across four distinct spatial environments — an outdoor yoga sanctuary, a floral arch arrival moment, a bell tent healing chamber, and an indoor studio — I designed and executed the full atmosphere, spatial layout, and sensory environment that held the experience.
+    </p>
+    <p class="section-body">
+      My role was not to facilitate the modalities themselves, but to design the container that made every modality possible — the spatial choreography, the material language, the lighting, the flow between zones, and the overall sensory register that invited guests into a state of openness from the moment they arrived.
+    </p>
+  </div>
+
+  <!-- MODALITIES -->
+  <div class="reveal">
+    <p class="section-eyebrow" style="margin-top:2rem;">Modalities hosted</p>
+    <div class="modalities">
+      <span class="modality">Sound Bath</span>
+      <span class="modality">Candle Guided Yin Yoga</span>
+      <span class="modality">Meditation & Breathwork</span>
+      <span class="modality">Alcohol Ink Workshop</span>
+      <span class="modality">Ritual Candle Making</span>
+      <span class="modality">Kundalini Yoga & Reiki</span>
+      <span class="modality">1:1 Massage</span>
+      <span class="modality">1:1 Acupuncture</span>
+      <span class="modality">Oracle Card Reading</span>
+      <span class="modality">Divine Connection to Nature</span>
+      <span class="modality">Vinyasa Flow</span>
+      <span class="modality">Drum Savasana</span>
+      <span class="modality">Live Music & Dinner</span>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- THE PROPERTY -->
+  <div class="reveal">
+    <p class="section-eyebrow">The Setting</p>
+    <h2 class="section-title">Wine Country as<br>sacred landscape</h2>
+    <p class="section-body">
+      The private estate in Temecula Wine Country provided a rare backdrop — rolling hills, palm trees, a natural garden environment, and the quiet that allows transformation to happen. Part of the design work was reading the property's existing energy and letting it inform every spatial decision made.
+    </p>
+  </div>
+
+  <div class="property-block reveal">
+    <img src="images/dyp-property.jpg" alt="Divine Yoga Properties estate — Temecula Wine Country">
+    <div class="property-caption">
+      <p>The estate — Temecula Wine Country. Palm trees, mountain backdrop, and the natural quiet that holds sacred gathering.</p>
+    </div>
+  </div>
+
+ <div class="property-block reveal">
+    <img src="images/dyp-sunset.jpg" alt="Sunset over Divine Yoga Properties — Temecula Wine Country">
+    <div class="property-caption">
+      <p>The close of day — golden light dissolving over the valley as the retreat settled into its final hours.</p>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- THE FOUR ZONES -->
+  <div class="reveal">
+    <p class="section-eyebrow">Spatial Design</p>
+    <h2 class="section-title">Four environments.<br>One coherent world.</h2>
+    <p class="section-body">
+      The retreat unfolded across four distinct spatial zones, each with its own atmosphere, material language, and emotional register — but all connected by a single thread of intentional design.
+    </p>
+  </div>
+
+  <div class="zones reveal">
+    <div class="zone-card">
+      <div class="zone-icon"></div>
+      <h4 class="zone-title">The Arrival Portal</h4>
+      <p class="zone-desc">A circular floral arch framing the estate's Buddha statue — the threshold guests crossed to enter the experience. Purple wisteria, white roses, eucalyptus, and golden hour light. The first signal that this was a different kind of gathering.</p>
+    </div>
+    <div class="zone-card">
+      <div class="zone-icon" style="background:var(--sage-lt);"></div>
+      <h4 class="zone-title">The Outdoor Sanctuary</h4>
+      <p class="zone-desc">An open-air yoga floor beneath a shade canopy, bordered by wild flowering gardens and anchored by a standing gong. Colorful mats, woven cushions, Mexican blankets, and votive candles — vibrant yet grounded in the natural landscape.</p>
+    </div>
+    <div class="zone-card">
+      <div class="zone-icon" style="background:var(--amber-dim);"></div>
+      <h4 class="zone-title">The Bell Tent Sanctuary</h4>
+      <p class="zone-desc">An intimate healing chamber inside a canvas bell tent — altar with Buddha, blooming branches, dream catcher, singing bowls, handpan, and frame drum. Candlelight and warm ambient glow. Designed for the most private, inward experiences of the day.</p>
+    </div>
+    <div class="zone-card">
+      <div class="zone-icon" style="background:var(--linen-dim);"></div>
+      <h4 class="zone-title">The Indoor Studio</h4>
+      <p class="zone-desc">The property's existing yoga studio — black mats, mirrored walls with sacred geometry, each mat prepared with a personal ceremonial tray. Designed for focused practice and small-group work in a contained, intentional environment.</p>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- SETUP GALLERY -->
+  <div class="reveal">
+    <p class="section-eyebrow">01 · The Setup</p>
+    <h2 class="section-title">Before the guests arrived</h2>
+    <p class="section-body">
+      Every space was composed before the first guest arrived — each mat, each candle, each floral placement considered as part of the overall sensory environment.
+    </p>
+  </div>
+
+  <div class="full-width reveal">
+    <div class="img-block">
+      <img src="images/dyp-hero.jpg" alt="Floral arch with Buddha at golden hour">
+    </div>
+  </div>
+
+  <div class="grid-2 reveal" style="align-items:stretch;">
+    <div class="img-block fixed" style="height:520px;">
+      <img src="images/dyp-setup-1.jpg" alt="Outdoor yoga sanctuary setup">
+    </div>
+    <div class="img-block fixed" style="height:520px;">
+      <img src="images/dyp-setup-2.jpg" alt="Outdoor sanctuary at dusk with string lights">
+    </div>
+  </div>
+
+  <div class="grid-2 reveal">
+    <div class="img-block">
+      <img src="images/dyp-setup-3.jpg" alt="Bell tent altar interior">
+    </div>
+    <div class="img-block">
+      <img src="images/dyp-setup-4.jpg" alt="Indoor studio setup">
+    </div>
+  </div>
+
+  <div class="full-width reveal">
+    <div class="img-block fixed" style="height:480px;">
+      <img src="images/dyp-detail-1.jpg" alt="Grazing table with seasonal produce and flowers" style="object-position:center 40%;">
+    </div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- EVENT GALLERY -->
+  <div class="reveal">
+    <p class="section-eyebrow">02 · The Experience</p>
+    <h2 class="section-title">The container, alive</h2>
+    <p class="section-body">
+      When guests arrived, the spaces came to life. What had been carefully composed became inhabited — the environment doing exactly what it was designed to do.
+    </p>
+  </div>
+
+  <div class="full-width reveal">
+    <div class="img-block">
+      <img src="images/dyp-event-1.jpg" alt="Guest in meditation by the gong">
+    </div>
+  </div>
+
+  <!-- VIDEO 1 — workshop footage -->
+  <div class="full-width reveal">
+    <div class="video-block">
+      <video src="images/dyp-workshop.mp4"
+        autoplay muted loop playsinline
+        style="width:100%;display:block;height:auto;">
+      </video>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- SCHEDULE -->
+  <div class="reveal">
+    <p class="section-eyebrow">03 · Experience Architecture</p>
+    <h2 class="section-title">Seven hours of<br>intentional flow</h2>
+    <p class="section-body">
+      The schedule was designed as an emotional arc — from settling in through soundbath, to active workshops and 1:1 sessions, to evening movement, music, and wind down. The spatial transitions between zones were part of that arc, each environment calibrated for the energy of its moment in the day.
+    </p>
+  </div>
+
+  <div class="schedule-block reveal">
+    <img src="images/dyp-schedule.jpg" alt="Divine Spring Awakening Retreat event schedule">
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- SOCIAL SECTION -->
+  <div class="reveal">
+    <p class="section-eyebrow">04 · As Experienced</p>
+    <h2 class="section-title">What guests shared</h2>
+    <p class="section-body">
+      The most authentic documentation of an experience is what people choose to share in the moment — when the design has done its job and guests want others to feel what they're feeling.
+    </p>
+  </div>
+
+  <div class="social-grid reveal">
+    <div>
+      <div class="video-block">
+        <video src="images/dyp-social.mp4"
+          autoplay muted loop playsinline
+          style="width:100%;display:block;height:auto;">
+        </video>
+      </div>
+      <p class="social-credit">via @divine_yoga_properties</p>
+    </div>
+    <div class="img-block">
+      <img src="images/dyp-schedule.jpg" alt="Event schedule shared by Divine Yoga Properties">
+      <p class="social-credit" style="padding:6px 0;">via @divine_yoga_properties</p>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- NEXT PROJECT -->
+  <a href="hangar-dinner.html" class="next-project reveal">
+    <div>
+      <p class="next-label">Next project</p>
+      <p class="next-title">Luxury Airplane Hangar Dinner →</p>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Javier Skipper</span>
+  <span class="footer-copy">© 2026 · Experiential Creative Director</span>
+</footer>
+
+<script>
+const els = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+els.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
