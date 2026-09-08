@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prince Street Boutique Openings — Javier Skipper</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --void:      #f8f4ee;
+  --deep:      #f0e8d8;
+  --stone:     #e4d8c4;
+  --amber:     #7a5218;
+  --amber-lt:  #c8943a;
+  --amber-dim: #b07a38;
+  --linen:     #1e1408;
+  --linen-dim: #5a4020;
+  --dust:      #c8b89a;
+  --rule:      #d8ccb8;
+  --ink:       #2a3050;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--void);
+  color: var(--linen);
+  overflow-x: hidden;
+}
+
+/* ── NAV ─────────────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  padding: 1.25rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  z-index: 100;
+  background: rgba(248,244,238,.97);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-back {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--amber); text-decoration: none; transition: gap .3s;
+}
+.nav-back:hover { gap: 14px; }
+.nav-back::before { content: '←'; font-size: 12px; }
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300; font-size: 14px;
+  letter-spacing: .22em; color: var(--linen-dim);
+  text-decoration: none; text-transform: uppercase;
+}
+.nav-project { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--dust); }
+
+/* ── REVEAL ──────────────────────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 1s ease, transform 1s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── HERO ────────────────────────────────────────────────────────── */
+.hero { width: 100%; position: relative; margin-top: 0; overflow: hidden; }
+.hero img {
+  width: 100%; height: auto; display: block;
+  max-height: 94vh; object-fit: cover; object-position: center center;
+}
+.hero-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(248,244,238,1) 0%, rgba(248,244,238,.95) 32%, rgba(248,244,238,.45) 62%, transparent 82%);
+  padding: 4rem;
+}
+.hero-eyebrow { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--amber); margin-bottom: .75rem; }
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400; font-size: clamp(32px, 5vw, 60px);
+  line-height: 1.1; color: var(--linen); margin-bottom: .5rem;
+  text-shadow: 0 1px 20px rgba(248,244,238,.8);
+}
+.hero-sub { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: var(--linen-dim); }
+
+/* ── CONTENT ─────────────────────────────────────────────────────── */
+.content { max-width: 960px; margin: 0 auto; padding: 0 3rem 6rem; }
+
+/* ── META ────────────────────────────────────────────────────────── */
+.meta-block {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 2rem; padding: 3rem 0;
+  border-bottom: 1px solid var(--rule); margin-bottom: 3rem;
+}
+.meta-label { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--dust); margin-bottom: .5rem; }
+.meta-value { font-size: 13px; color: var(--linen-dim); font-weight: 300; line-height: 1.5; }
+
+/* ── PRESS ROW ───────────────────────────────────────────────────── */
+.press-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; background: var(--rule);
+  margin-bottom: 4rem; border: 1px solid var(--rule);
+}
+.press-card {
+  background: var(--void); padding: 1.5rem;
+  text-decoration: none; display: block;
+  transition: background .35s;
+}
+.press-card:hover { background: var(--deep); }
+.press-outlet {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; color: var(--linen);
+  margin-bottom: .4rem; letter-spacing: .04em;
+}
+.press-note {
+  font-size: 10px; line-height: 1.6; color: var(--linen-dim);
+  font-weight: 300; margin-bottom: .75rem;
+}
+.press-link {
+  font-size: 8px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--amber-dim);
+}
+.press-card:hover .press-link { color: var(--amber); }
+
+/* ── TYPOGRAPHY ──────────────────────────────────────────────────── */
+.section-eyebrow { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--amber); margin-bottom: .75rem; }
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300; font-size: clamp(24px, 3vw, 36px);
+  color: var(--linen); margin-bottom: 1.5rem; line-height: 1.2;
+}
+.section-body { font-size: 13px; line-height: 1.9; color: var(--linen-dim); font-weight: 300; max-width: 640px; margin-bottom: 1rem; }
+.section-rule { border: none; border-top: 1px solid var(--rule); margin: 4rem 0; }
+
+/* ── CHAPTER ─────────────────────────────────────────────────────── */
+.chapter { margin-bottom: 4rem; }
+.chapter-header {
+  display: flex; align-items: baseline; gap: 1.5rem;
+  padding-bottom: 1rem; margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.chapter-num { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: var(--amber-dim); flex-shrink: 0; }
+.chapter-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(20px, 2.5vw, 28px); color: var(--linen); }
+.chapter-desc { font-size: 12px; line-height: 1.85; color: var(--linen-dim); font-weight: 300; margin-bottom: 2rem; max-width: 620px; }
+
+/* ── IMAGE BLOCKS ────────────────────────────────────────────────── */
+.img-block { line-height: 0; background: var(--stone); }
+.img-block img { width: 100%; height: auto; display: block; }
+
+
+/* ── GRIDS ───────────────────────────────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1.5rem 0; align-items: start; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 1.5rem 0; align-items: start; }
+.full-width { margin: 1.5rem 0; }
+
+/* ── BRAND LIST ──────────────────────────────────────────────────── */
+.brands { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--rule); margin: 2rem 0; border: 1px solid var(--rule); }
+.brand-cell { background: var(--void); padding: 1.5rem 1.25rem; }
+.brand-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; color: var(--linen);
+  margin-bottom: .4rem; line-height: 1.25;
+}
+.brand-note { font-size: 10px; line-height: 1.7; color: var(--linen-dim); font-weight: 300; }
+
+/* ── PROJECT LABEL ───────────────────────────────────────────────── */
+.project-label {
+  font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--dust); margin-top: 10px; font-style: italic;
+  padding-bottom: 1rem;
+}
+
+/* ── REEL FALLBACK CARD ──────────────────────────────────────────── */
+.reel-card {
+  background: var(--linen); padding: 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 2rem; margin: 1.5rem 0; flex-wrap: wrap;
+}
+.reel-label { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--dust); margin-bottom: .5rem; }
+.reel-desc { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: var(--void); }
+.reel-btn {
+  display: inline-flex; align-items: center; gap: .75rem;
+  border: 1px solid var(--amber-dim); padding: .875rem 1.75rem;
+  text-decoration: none; transition: background .3s; flex-shrink: 0;
+}
+.reel-btn:hover { background: var(--amber-dim); }
+.reel-btn span { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--void); }
+.reel-btn svg { width: 14px; height: 14px; }
+
+/* ── CREDITS ─────────────────────────────────────────────────────── */
+.credits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 2rem 0; }
+.credit-label { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--dust); margin-bottom: .4rem; }
+.credit-value { font-size: 12px; color: var(--linen-dim); font-weight: 300; }
+
+/* ── NEXT ────────────────────────────────────────────────────────── */
+.next-project {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 3rem 0; border-top: 1px solid var(--rule);
+  text-decoration: none; transition: opacity .3s;
+}
+.next-project:hover { opacity: .7; }
+.next-label { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--dust); margin-bottom: .5rem; }
+.next-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 24px; color: var(--linen); font-style: italic; }
+.next-arrow { font-size: 28px; color: var(--amber-dim); }
+
+/* ── FOOTER ──────────────────────────────────────────────────────── */
+footer { padding: 2rem 3rem; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; }
+.footer-name { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--amber-dim); }
+.footer-copy { font-size: 9px; color: var(--dust); }
+
+/* ── RESPONSIVE ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-project { display: none; }
+  .hero-overlay { padding: 2rem 1.5rem; }
+  .content { padding: 0 1.5rem 4rem; }
+  .meta-block { grid-template-columns: 1fr 1fr; }
+  .press-row { grid-template-columns: 1fr; }
+  .brands { grid-template-columns: 1fr 1fr; }
+  .credits { grid-template-columns: 1fr; gap: 1.25rem; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .reel-card { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-back">All Projects</a>
+  <a href="index.html" class="nav-logo">Javier Skipper</a>
+  <span class="nav-project">Prince Street</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="images/soho-hero.jpg" alt="Prince Street closed for the Estée Lauder Companies boutique opening dinner">
+  <div class="hero-overlay">
+    <p class="hero-eyebrow">Estée Lauder Companies · Soho, NYC · October 3, 2025</p>
+    <h1 class="hero-title">Prince Street<br>Boutique Openings</h1>
+    <p class="hero-sub">Four fragrance houses. One street. One table.</p>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- META -->
+  <div class="meta-block reveal">
+    <div>
+      <div class="meta-label">Client</div>
+      <div class="meta-value">Estée Lauder Companies · Luxury Portfolio</div>
+    </div>
+    <div>
+      <div class="meta-label">Role</div>
+      <div class="meta-value">Planning Lead — Luxury Portfolio Events</div>
+    </div>
+    <div>
+      <div class="meta-label">Location</div>
+      <div class="meta-value">Prince Street, Soho · New York City</div>
+    </div>
+    <div>
+      <div class="meta-label">Scope</div>
+      <div class="meta-value">Brand governance · Guest experience · Comms partnership · Production oversight</div>
+    </div>
+  </div>
+
+  <!-- PRESS -->
+  <div class="press-row reveal">
+    <a href="https://www.elle.com/elleextra/events/a68853706/estee-lauder-prince-street-fragrance-opening-party-photos-2025/" target="_blank" class="press-card">
+      <div class="press-outlet">ELLE</div>
+      <p class="press-note">Photo coverage of the Prince Street fragrance opening party.</p>
+      <span class="press-link">Read →</span>
+    </a>
+    <a href="https://wwd.com/fashion-news/fashion-scoops/estee-lauder-new-fragrance-boutiques-dinner-1238285178/" target="_blank" class="press-card">
+      <div class="press-outlet">WWD</div>
+      <p class="press-note">Reporting on the new fragrance boutiques and the opening dinner.</p>
+      <span class="press-link">Read →</span>
+    </a>
+    <a href="https://www.businessoffashion.com/briefings/beauty/full-coverage-estee-lauders-soho-takeover-the-death-of-the-great-american-beauty-brand/" target="_blank" class="press-card">
+      <div class="press-outlet">Business of Fashion</div>
+      <p class="press-note">Full coverage of the Soho takeover and its strategic context.</p>
+      <span class="press-link">Read →</span>
+    </a>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="reveal">
+    <p class="section-eyebrow">Project Overview</p>
+    <h2 class="section-title">A city street, closed<br>and set for dinner</h2>
+    <p class="section-body">
+      To mark the simultaneous opening of four Estée Lauder Companies fragrance boutiques on Prince Street in Soho, we closed the block and set a single continuous table down the center of it. Guests dined in the middle of the street, framed on both sides by the newly opened storefronts — Kilian Paris, Tom Ford Beauty, Jo Malone London, and Editions de Parfums Frédéric Malle — each activated with its own in-store experience.
+    </p>
+    <p class="section-body">
+      As Planning Lead for the luxury portfolio, my responsibility was holding the through-line: partnering with global and North America communications to ensure every brand was represented to its own standard, while keeping the evening high-touch rather than corporate. Four distinct fragrance houses, each with non-negotiable identity guidelines, had to coexist in one shared visual field without any of them being diminished.
+    </p>
+    <p class="section-body">
+      The resolution was a deliberately restrained shared palette — deep navy velvet, dark marble, blue thistle, silver and candlelight — that belonged to none of the four houses individually and therefore competed with none of them. The street became neutral ground. Each boutique retained its own world.
+    </p>
+  </div>
+
+  <!-- BRAND CELLS -->
+  <div class="brands reveal">
+    <div class="brand-cell">
+      <div class="brand-name">Kilian Paris</div>
+      <p class="brand-note">Dark wood, brass, and decanters — the fragrance bar as social anchor.</p>
+    </div>
+    <div class="brand-cell">
+      <div class="brand-name">Tom Ford Beauty</div>
+      <p class="brand-note">Editorial restraint and low light, holding the corner of the block.</p>
+    </div>
+    <div class="brand-cell">
+      <div class="brand-name">Jo Malone London</div>
+      <p class="brand-note">Live bottle painting and botanical styling, the warmest room on the street.</p>
+    </div>
+    <div class="brand-cell">
+      <div class="brand-name">Frédéric Malle</div>
+      <p class="brand-note">A resident sketch artist working live among the perfumer columns.</p>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- ── 01 THE STREET ──────────────────────────────────────────── -->
+  <div class="chapter reveal">
+    <div class="chapter-header">
+      <span class="chapter-num">01</span>
+      <h3 class="chapter-title">The Street</h3>
+    </div>
+    <p class="chapter-desc">
+      A single table running the length of Prince Street, seating guests between the four storefronts. Navy velvet seating, dark marble surfaces, and blue thistle running the full length — a palette chosen to be shared rather than owned, so no house was subordinated to another.
+    </p>
+
+    <div class="full-width reveal">
+      <div class="img-block">
+        <img src="images/soho-street-1.jpg" alt="Tom Ford and Jo Malone storefronts with guests before dinner">
+      </div>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="img-block">
+        <img src="images/soho-table-1.jpg" alt="Table detail with blue thistle florals and navy velvet seating">
+      </div>
+      <div class="img-block">
+        <img src="images/soho-table-3.jpg" alt="Overhead view of the table with passing taxi">
+      </div>
+    </div>
+
+    <div class="full-width reveal">
+      <div class="img-block">
+        <img src="images/soho-table-2.jpg" alt="Overhead view of guests dining on Prince Street">
+      </div>
+    </div>
+    <p class="project-label">Prince Street · Soho, New York City · October 3, 2025</p>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- ── 02 THE BOUTIQUES ───────────────────────────────────────── -->
+  <div class="chapter reveal">
+    <div class="chapter-header">
+      <span class="chapter-num">02</span>
+      <h3 class="chapter-title">The Boutiques</h3>
+    </div>
+    <p class="chapter-desc">
+      Each storefront was activated as its own destination within the evening — guests moved between the street and the four interiors throughout the night. The in-store programming was built to feel native to each house rather than applied to it: a fragrance bar at Kilian, live artists at Frédéric Malle and Jo Malone, and open scent discovery throughout.
+    </p>
+
+    <div class="grid-2 reveal">
+      <div class="img-block">
+        <img src="images/soho-kilian-1.jpg" alt="Guest at the Kilian Paris boutique">
+      </div>
+      <div class="img-block">
+        <img src="images/soho-kilian-2.jpg" alt="Guests at the Kilian Paris fragrance bar">
+      </div>
+    </div>
+    <p class="project-label">Kilian Paris</p>
+
+    <div class="grid-2 reveal" style="margin-top:2rem;">
+      <div class="img-block">
+        <img src="images/soho-malle-1.jpg" alt="Live sketch artist at Editions de Parfums Frédéric Malle">
+      </div>
+      <div class="img-block">
+        <img src="images/soho-jomalone-2.jpg" alt="Live bottle painting at Jo Malone London">
+      </div>
+    </div>
+    <div class="grid-2" style="margin-top:0;">
+      <p class="project-label">Editions de Parfums Frédéric Malle</p>
+      <p class="project-label">Jo Malone London</p>
+    </div>
+
+    <div class="full-width reveal">
+      <div class="img-block">
+        <img src="images/soho-jomalone-1.jpg" alt="Guests discovering fragrance in-store">
+      </div>
+    </div>
+    <p class="project-label">In-store fragrance discovery</p>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- ── 03 THE REEL ────────────────────────────────────────────── -->
+  <div class="chapter reveal">
+    <div class="chapter-header">
+      <span class="chapter-num">03</span>
+      <h3 class="chapter-title">The Evening in Motion</h3>
+    </div>
+    <p class="chapter-desc">
+      Film captured across the street and all four boutiques over the course of the night.
+    </p>
+
+    <div class="reel-card reveal">
+      <div>
+        <p class="reel-label">Full Reel</p>
+        <p class="reel-desc">Watch the evening on Instagram.</p>
+      </div>
+      <a href="https://www.instagram.com/reel/DPl3PJPDruk/" target="_blank" class="reel-btn">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="9" stroke="#f8f4ee" stroke-width="1.5"/>
+          <path d="M10 8.5l6 3.5-6 3.5V8.5z" fill="#f8f4ee"/>
+        </svg>
+        <span>Watch Reel</span>
+      </a>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- CREDITS -->
+  <div class="reveal">
+    <p class="section-eyebrow">Credits</p>
+    <div class="credits">
+      <div>
+        <div class="credit-label">Production</div>
+        <div class="credit-value">Birch Events</div>
+      </div>
+      <div>
+        <div class="credit-label">Film</div>
+        <div class="credit-value">@KennethCooperFilms</div>
+      </div>
+      <div>
+        <div class="credit-label">Photography</div>
+        <div class="credit-value">Dylan Chandler</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEXT PROJECT -->
+  <a href="hangar-dinner.html" class="next-project reveal">
+    <div>
+      <p class="next-label">Next project</p>
+      <p class="next-title">Luxury Airplane Hangar Dinner →</p>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Javier Skipper</span>
+  <span class="footer-copy">© 2026 · Experiential Creative Director</span>
+</footer>
+
+<script>
+const els = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+els.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
