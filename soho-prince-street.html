@@ -57,17 +57,21 @@ nav {
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ── HERO ────────────────────────────────────────────────────────── */
-.hero { width: 100%; position: relative; margin-top: 0; overflow: hidden; }
+.hero { width: 100%; position: relative; margin-top: 0; overflow: hidden; height: 86vh; }
 .hero img {
-  width: 100%; height: auto; display: block;
-  max-height: 94vh; object-fit: cover; object-position: center center;
+  width: 100%; height: 100%; display: block;
+  object-fit: cover; object-position: center 72%;
 }
 .hero-overlay {
   position: absolute; bottom: 0; left: 0; right: 0;
-  background: linear-gradient(to top, rgba(248,244,238,1) 0%, rgba(248,244,238,.95) 32%, rgba(248,244,238,.45) 62%, transparent 82%);
-  padding: 4rem;
+    background: linear-gradient(to top, rgba(248,244,238,1) 0%, rgba(248,244,238,1) 46%, rgba(248,244,238,.82) 66%, rgba(248,244,238,.35) 84%, transparent 100%);
+  padding: 5rem 4rem 4rem;
 }
-.hero-eyebrow { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--amber); margin-bottom: .75rem; }
+.hero-eyebrow {
+  font-size: 9px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: .75rem;
+  text-shadow: 0 1px 12px rgba(248,244,238,.9);
+}
 .hero-title {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 400; font-size: clamp(32px, 5vw, 60px);
